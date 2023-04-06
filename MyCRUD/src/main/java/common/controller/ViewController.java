@@ -1,7 +1,9 @@
 package common.controller;
 
 import java.io.*;
+import java.lang.reflect.Constructor;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
@@ -36,6 +38,29 @@ public class ViewController extends HttpServlet {
 			pr.load(fis);
 			
 			Enumeration<Object> en = pr.keys();
+			
+			while(en.hasMoreElements()) {
+				String key = (String)en.nextElement();
+
+				String className = pr.getProperty(key);
+				
+				if(className != null) {
+					className = className.trim();
+					
+					Class<?> cls = Class.forName(className);
+
+					Constructor<?> constrt = cls.getDeclaredConstructor();
+
+					
+					Object obj = constrt.newInstance();
+
+					
+					cmdMap.put(key, obj);
+
+					
+				}
+			}
+			
 		}
 		
 		catch (FileNotFoundException e) {
