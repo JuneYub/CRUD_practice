@@ -17,14 +17,14 @@ import javax.servlet.http.*;
 @WebServlet(
 		urlPatterns = { "*.book" }, 
 		initParams = { 
-				@WebInitParam(name = "propertyConfig", value = "properties가 있는 경로", description = "*.book")
+				@WebInitParam(name = "propertyConfig", value = "C:/Users/user/git/CRUD_practice/MyCRUD/src/main/webapp/WEB-INF/Command.properties", description = "*.book")
 		})
 public class ViewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	Map<String, Object> cmdMap = new HashMap<>();
 	
-	public void inti(ServletConfig config) throws ServletException {
+	public void init(ServletConfig config) throws ServletException {
 		
 		FileInputStream fis = null;
 		
@@ -41,7 +41,7 @@ public class ViewController extends HttpServlet {
 			
 			while(en.hasMoreElements()) {
 				String key = (String)en.nextElement();
-
+				
 				String className = pr.getProperty(key);
 				
 				if(className != null) {
@@ -79,10 +79,12 @@ public class ViewController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String uri = request.getRequestURI();
-		
+		System.out.println("uri : "+ uri);
 		String key = uri.substring(request.getContextPath().length());
-		
+		System.out.println("key : "+ key);
 		AbstractController action = (AbstractController)cmdMap.get(key);
+		
+		System.out.println("action : "+ action);
 		
 		if(action == null) {
 			// url과 매핑된 클래스가 없으면 예외처리하는 곳
