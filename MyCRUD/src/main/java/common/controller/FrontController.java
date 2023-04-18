@@ -1,3 +1,4 @@
+// 프로젝트 초기 설정
 package common.controller;
 
 import java.io.*;
@@ -19,7 +20,7 @@ import javax.servlet.http.*;
 		initParams = { 
 				@WebInitParam(name = "propertyConfig", value = "C:/Users/user/git/CRUD_practice/MyCRUD/src/main/webapp/WEB-INF/Command.properties", description = "*.book")
 		})
-public class ViewController extends HttpServlet {
+public class FrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	Map<String, Object> cmdMap = new HashMap<>();
