@@ -1,3 +1,4 @@
+// 프로젝트 초기 설정
 package common.controller;
 
 import java.sql.SQLException;
